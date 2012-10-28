@@ -24,7 +24,7 @@ effess.copy_to_dir(glob(path.join(build.titanium_sdk_dir, "*.py")),
 	sdk_dir, exclude=excludes)
 effess.copy_to_dir(glob(path.join(build.titanium_sdk_dir, "PyRTF")),
 	sdk_dir, exclude=excludes)
-effess.copy_to_dir(glob(path.join(build.libtide_source_dir, 'tools', "effess.py")),
+effess.copy_to_dir(glob(path.join('site_scons', "effess.py")),
 	sdk_dir, exclude=excludes)
 
 if build.is_osx():
@@ -47,7 +47,7 @@ def build_dist_zips(target, source, env):
 
 	print "Packing %s" % f
 	effess.make_zip(build.runtime_build_dir, f, exclude=excludes)
-	
+
 	for m in build.modules:
 		f = path.join(build.dist_dir, 'module-%s-%s.zip' % (m.name, m.version))
 		print "Packing %s" % f
@@ -89,14 +89,14 @@ def build_packaging_tools(target, source, env):
 	tgz_file.close()
 
 # Builder for all module and runtime component zip files
-build.env.Append(BUILDERS = 
+build.env.Append(BUILDERS =
 	{'BuildDistZips' : Builder(action=build_dist_zips)})
 zips = build.env.BuildDistZips('#dummy-dist-zips', [])
 build.mark_dist_target(zips)
 AlwaysBuild(zips)
 
 # Builder for SDK component zip file
-build.env.Append(BUILDERS = 
+build.env.Append(BUILDERS =
 	{'BuildSDK' : Builder(action=build_sdk)})
 sdk_target = build.env.BuildSDK('build-sdk', [])
 build.env.Depends(sdk_target, zips)
@@ -104,7 +104,7 @@ build.mark_dist_target(sdk_target)
 AlwaysBuild(sdk_target)
 
 # Builder for packaging tools tgz file
-build.env.Append(BUILDERS = 
+build.env.Append(BUILDERS =
 	{'BuildPackagingTools' : Builder(action=build_packaging_tools)})
 packaging_tools_target = build.env.BuildPackagingTools('build-pkg-tools', [])
 build.env.Depends(packaging_tools_target, zips)
