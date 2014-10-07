@@ -1,5 +1,6 @@
 TideSDK
 =======
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/datiecher/TideSDK?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Current Build Status
 [![Build Status](https://travis-ci.org/TideSDK/TideSDK.png)](https://travis-ci.org/TideSDK/TideSDK)
